@@ -12,12 +12,6 @@ from . import views
 urlpatterns = [
     url(r'^login/$', views.custom_login, {'template_name': 'spirit/user/auth/login.html'}, name='login'),
     url(r'^logout/$', views.custom_logout, {'next_page': '/', }, name='logout'),
-
-    url(r'^register/$', views.register, name='register'),
-    url(r'^resend-activation/$', views.resend_activation_email, name='resend-activation'),
-
-    url(r'^activation/(?P<pk>\d+)/(?P<token>[0-9A-Za-z_\-\.]+)/$', views.registration_activation,
-        name='registration-activation'),
     url(r'^password-reset/$', views.custom_password_reset,
         {
             'template_name': 'spirit/user/auth/password_reset_form.html',
