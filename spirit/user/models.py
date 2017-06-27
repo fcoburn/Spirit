@@ -32,6 +32,7 @@ class UserProfile(models.Model):
 
     last_post_hash = models.CharField(_("last post hash"), max_length=32, blank=True)
     last_post_on = models.DateTimeField(_("last post on"), null=True, blank=True)
+    bank_account = models.DecimalField(_("bank account"), max_digits=19,decimal_places=2, default=100.00)
 
     class Meta:
         verbose_name = _("forum profile")

@@ -39,6 +39,7 @@ class Comment(models.Model):
 
     modified_count = models.PositiveIntegerField(_("modified count"), default=0)
     likes_count = models.PositiveIntegerField(_("likes count"), default=0)
+    comment_value = models.DecimalField(_("comment value"), max_digits=19,decimal_places=2, default=0)
 
     objects = CommentQuerySet.as_manager()
 
