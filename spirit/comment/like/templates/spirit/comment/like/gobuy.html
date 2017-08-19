@@ -1,0 +1,18 @@
+{% extends "spirit/_base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Buy" %}{% endblock %}
+
+{% block content %}
+
+    <h1 class="headline">{% blocktrans trimmed with username=comment.user.username %}Buy {{ username }}'s comment{% endblocktrans %}</h1>
+
+    <form action="." method="post">
+        {% csrf_token %}
+        {% include "spirit/_form.html" %}
+        Amount:<input type="text" name="amount"><br><br>
+        <input class="button" type="submit" name="post" value="{% trans "Buy" %}" />
+    </form>
+
+{% endblock %}
