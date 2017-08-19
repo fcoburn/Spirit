@@ -9,6 +9,7 @@ import spirit.comment.flag.urls
 import spirit.comment.history.urls
 import spirit.comment.like.urls
 import spirit.comment.poll.urls
+import spirit.comment.buy.urls
 from . import views
 
 
@@ -30,4 +31,5 @@ urlpatterns = [
     url(r'^history/', include(spirit.comment.history.urls, namespace='history')),
     url(r'^like/', include(spirit.comment.like.urls, namespace='like')),
     url(r'^poll/', include(spirit.comment.poll.urls, namespace='poll')),
+    url(r'^buy/', include(spirit.comment.buy.urls, namespace='buy')),
 ]
