@@ -74,6 +74,11 @@ class Comment(models.Model):
         Comment.objects\
             .filter(pk=self.pk, likes_count__gt=0)\
             .update(likes_count=F('likes_count') - 1)
+            
+    def increase_comment_value(self, amount):
+        Comment.objects\
+            .filter(pk=self.pk)\
+            .update(comment_value=F('comment_value') + amount)
 
     @classmethod
     def create_moderation_action(cls, user, topic, action):
