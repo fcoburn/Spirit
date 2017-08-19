@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from django.conf import settings
+from django.db.models import F, When
 
 from ..core.utils.models import AutoSlugField
 
@@ -32,7 +33,7 @@ class UserProfile(models.Model):
 
     last_post_hash = models.CharField(_("last post hash"), max_length=32, blank=True)
     last_post_on = models.DateTimeField(_("last post on"), null=True, blank=True)
-    bank_account = models.DecimalField(_("bank account"), max_digits=19,decimal_places=2, default=100.00)
+    bank_account = models.DecimalField(_("bank account"), max_digits=19,decimal_places=2, default=1000000.00)
 
     class Meta:
         verbose_name = _("forum profile")
@@ -49,6 +50,15 @@ class UserProfile(models.Model):
 
     def get_absolute_url(self):
         return reverse('spirit:user:detail', kwargs={'pk': self.user.pk, 'slug': self.slug})
+        
+    def debit_bank_account(self, amount):
+        UserProfile.objects\
+            .filter(pk=self.pk)\
+            .update(bank_account=F('bank_account') - amount)
+
+    def check_bank_account(self, amount):
+        return (UserProfile.objects\
+                    .filter(pk=self.pk,bank_account=F('bank_account')))       
 
     def update_post_hash(self, post_hash):
         assert self.pk

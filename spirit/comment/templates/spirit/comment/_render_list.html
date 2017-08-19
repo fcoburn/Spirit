@@ -70,7 +70,10 @@
                             {% ifnotequal c.user.pk user.pk %}
                                 <li><a href="{% url "spirit:comment:publish" topic_id=topic.pk pk=c.pk %}" >{% trans "quote" %}</a></li>
                                 <li><a href="#reply" >{% trans "reply" %}</a></li>
+                                <a href={% url "spirit:comment:buy:gobuy" c.pk %}>Testing Buy feature</a> {{ c.comment_value }}
                             {% endifnotequal %}
+                            
+                            
                         {% endif %}
                     </ul>
 
